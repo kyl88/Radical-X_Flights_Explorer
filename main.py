@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
     
 app = FastAPI()
 
+# Routes
 @app.post("/generate-flight/")
 def generate_flight(flight_input: models.FlightInput, num_flights: int, db: Session = Depends(models.get_db)):
     return generate_flights(flight_input, num_flights, db)
