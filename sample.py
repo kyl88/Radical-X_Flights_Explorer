@@ -4,7 +4,7 @@ from vertexai.preview import generative_models
 from vertexai.preview.generative_models import GenerativeModel, Tool, Part, Content, ChatSession
 from services.flight_manager import search_flights
 
-project = "sample-gemini"
+project = "gemin-flights"
 vertexai.init(project = project)
 
 # Define Tool
@@ -27,11 +27,70 @@ get_search_flights = generative_models.FunctionDeclaration(
                 "format": "date",
                 "description": "The date of departure for the flight in YYYY-MM-DD format"
             },
+
+            "arrival_date": {
+                "type" : "string",
+                "format":"date",
+                "description": "The date of arrival for the flight in YYYY-MM-DD"
+            },
+
+              "departure_time": {
+                 "type" : "string",
+                 "format":"date/time",
+                 "description": "The time of departure for the flight"
+            },
+
+              "arrival_time": {
+                 "type" : "string",
+                 "format":"date/time",
+                 "description": "The time of arrival for the flight"
+            },
+
+              "open_seats_economy": {
+                 "type" : "integer",
+                 "description": "economy category of seats for the flight"
+            },
+
+              "business_seats_economy": {
+                 "type" : "integer",
+                 "description": "business category of seats for the flight "
+            },
+               "first_class_seats_economy": {
+                 "type" : "integer",
+                 "description": "first class category of seats for the flight"
+            },
+               "economy_seats_cost": {
+                 "type" : "integer",
+                 "description": "economy class seating cost for the flight"
+            },
+            
+               "business_seats_cost": {
+                 "type" : "integer",
+                 "description": "business class seating cost for the flight"
+            },
+               "first_class_seats_cost": {
+                 "type" : "integer",
+                 "description": "first class seating cost for the flight"
+            } 
+
+
+
+
+
         },
         "required": [
             "origin",
             "destination",
-            "departure_date"
+            "departure_date",
+            "arrival_date",
+            "departure_time",
+            "arrival_time",
+            "open_seats_economy",
+            "open_seats_business",
+            "open_seats_first_class",
+            "economy_seats_cost",
+            "business_seats_cost",
+            "first_class_seats_cost"
         ]
     },
 )
@@ -101,6 +160,33 @@ def llm_function(chat: ChatSession, query):
     )
 
 st.title("Gemini Flights")
+
+st.write("To search for flights, you can provide me with the following information:")
+
+st.markdown("""
+- Departure date (in YYYY-MM-DD format)
+- Destination airport code (LAX, SFO, BOS) 
+- Origin airport code e.g LAX,SFO,BOS
+                                 
+
+ """)
+
+st.write("Once you've provided me with these details, I'll search for available flights that match your criteria.")
+
+st.write("If you find a flight you like, you can book it by providing me with the following information: ")
+
+st.markdown("""
+- Flight ID
+- Number of seats
+- Seat type(e.g economy,business, first-class)
+                                 
+
+ """)
+
+st.write("I'll take care of the rest and confirm your booking. ")
+
+st.write("Do you have any questions before we get started? ")
+
 
 chat = model.start_chat()
 
