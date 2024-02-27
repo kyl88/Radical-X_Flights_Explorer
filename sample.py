@@ -31,66 +31,59 @@ get_search_flights = generative_models.FunctionDeclaration(
             "arrival_date": {
                 "type" : "string",
                 "format":"date",
-                "description": "The date of arrival for the flight in YYYY-MM-DD"
+                "description": "The date of return flight in YYYY-MM-DD flight"
+            },
+
+            
+            "flight_number": {
+                "type" : "integer",
+                "description": "flight number for the actual flight scheduled"
+            },
+
+            
+            "airline": {
+                "type" : "string",
+                "description": "The airline used for the flight"
             },
 
               "departure_time": {
                  "type" : "string",
-                 "format":"date/time",
+                 "format":"time",
                  "description": "The time of departure for the flight"
             },
 
               "arrival_time": {
                  "type" : "string",
-                 "format":"date/time",
+                 "format":"time",
                  "description": "The time of arrival for the flight"
             },
 
-              "open_seats_economy": {
-                 "type" : "integer",
-                 "description": "economy category of seats for the flight"
+              "seat_type": {
+                 "type" : "string",
+                 "description": "category of seats for the flight"
             },
 
-              "business_seats_economy": {
+              "min_cost": {
                  "type" : "integer",
-                 "description": "business category of seats for the flight "
+                 "description": "min cost of seats for the flight"
             },
-               "first_class_seats_economy": {
+               "max_cost": {
                  "type" : "integer",
-                 "description": "first class category of seats for the flight"
-            },
-               "economy_seats_cost": {
-                 "type" : "integer",
-                 "description": "economy class seating cost for the flight"
-            },
-            
-               "business_seats_cost": {
-                 "type" : "integer",
-                 "description": "business class seating cost for the flight"
-            },
-               "first_class_seats_cost": {
-                 "type" : "integer",
-                 "description": "first class seating cost for the flight"
-            } 
-
-
-
-
-
+                 "description": "max cost of seats for the flight"
+            }             
         },
         "required": [
             "origin",
             "destination",
             "departure_date",
             "arrival_date",
+            "flight number",
+            "airline",
             "departure_time",
             "arrival_time",
-            "open_seats_economy",
-            "open_seats_business",
-            "open_seats_first_class",
-            "economy_seats_cost",
-            "business_seats_cost",
-            "first_class_seats_cost"
+            "seat-type",
+            "min_cost",
+            "max_cost"
         ]
     },
 )
