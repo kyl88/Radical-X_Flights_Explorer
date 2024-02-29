@@ -191,6 +191,8 @@ def handle_flight_search(criteria, db: Session, page: Optional[int] = 1, page_si
     }
 
 def handle_flight_book(flight_id: int, seat_type: str, num_seats: int = 1, db: Session = Depends(get_db)):
+   
+
     """
     Books a specified number of seats on a flight.
 
@@ -245,6 +247,7 @@ def handle_flight_book(flight_id: int, seat_type: str, num_seats: int = 1, db: S
     return {"message": success_message, "flight_info": flight}
 
 def search_flights(**params):
+
     """
     Sends a GET request to a FastAPI endpoint to search for flights based on various criteria.
 
